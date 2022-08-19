@@ -3,12 +3,12 @@
   <h1>Customers</h1>
 </div>
 
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
   <div class="m-3">
-    <input formControlName="firstName" type="text" class="form-control" placeholder="First Name">
+    <input formControlName="first_name" type="text" class="form-control" placeholder="First Name">
   </div>
   <div class="m-3">
-    <input formControlName="lastLame" type="text" class="form-control" placeholder="Last Name">
+    <input formControlName="last_name" type="text" class="form-control" placeholder="Last Name">
   </div>
   <div class="m-3">
     <input formControlName="phone" type="text" class="form-control" placeholder="Phone">

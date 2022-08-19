@@ -16,9 +16,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { number } from 'joi';
 import { ApiService } from 'src/app/core/api.service';
 import { AuthService } from 'src/app/core/auth.service';
-import { Customer, EditedCustomer, User } from 'src/app/shared/types';
+import { Customer, User } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-customers',
@@ -30,10 +31,10 @@ export class CustomersComponent implements OnInit {
   @Input() user!: User;
 
   addCustomerForm = new FormGroup({
-    firstName: new FormControl('', {
+    first_name: new FormControl('', {
       validators: Validators.required,
     }),
-    lastName: new FormControl('', {
+    last_name: new FormControl('', {
       validators: Validators.required,
     }),
     email: new FormControl('', {
@@ -44,11 +45,22 @@ export class CustomersComponent implements OnInit {
     }),
   });
 
-  onSubmit() {}
+  onSubmit() {
+    if (!this.addCustomerForm.valid) {
+      return;
+    }
+    console.log('in submit form');
+    let user_id = this.user.id;
+    this.apiService.addCustomer(this.addCustomerForm.value, user_id).subscribe({
+      next: (data: Customer) => {
+        this.getCustomers(this.user);
+        //this.showNotification = true;
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
-  constructor(
-    private apiService: ApiService // private renderer: Renderer2, //private authService: AuthService, // private router: Router
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.getCustomers(this.user);
@@ -69,7 +81,7 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer) {
-    // let id = customer.id;
+    let id = customer.id;
     //let theId = id.toString();
     console.log("i'm in delete, customer_id= " + customer.id);
     this.apiService.deleteCustomer(customer.id);

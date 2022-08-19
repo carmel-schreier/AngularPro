@@ -97,4 +97,57 @@ module.exports = {
         }
 
     },
+
+    addCustomer: async function (req, res, next) {
+        const reqBody = req.body;
+        const schema = joi.object({
+            //id: joi.number().required(),
+            first_name: joi.string().min(2).max(200),
+            last_name: joi.string().min(2).max(300),
+            phone: joi.string().regex(/^[0-9-]{8,12}$/),
+            email: joi
+                .string()
+                .required()
+                .email()
+                .regex(/^[^@]+@[^@]+$/),
+            user_id: joi.number().required(),
+
+        }).min(1);
+
+        const {
+            error,
+            value
+        } = schema.validate(reqBody);
+
+
+
+        if (error) {
+            res.status(400).send(`Error adding customer: ${error}`);
+            console.log(error.details[0].message);
+            return;
+        }
+
+        const sql =
+            "INSERT INTO customers(first_name,last_name, phone, email, user_id)" +
+            " VALUES(?,?,?,?,?);";
+
+        try {
+            const result = await database.query(
+                sql,
+                [
+                    reqBody.first_name,
+                    reqBody.last_name,
+                    reqBody.phone,
+                    reqBody.email,
+                    reqBody.user_id,
+                ]
+            );
+        } catch (err) {
+            console.log(`Error: ${err}`)
+            res.status(409).send('Failed to add customer');
+            return;
+        }
+        res.status(200).json(reqBody)
+    },
+
 }

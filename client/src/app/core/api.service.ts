@@ -1,4 +1,4 @@
-import { EditedCustomer, Login, RegisterUser, User } from './../shared/types';
+import { AddCustomer, Login, RegisterUser, User } from './../shared/types';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -33,13 +33,24 @@ export class ApiService {
     );
   }
 
-  editCustomerDetails(
-    customer: EditedCustomer,
-    id: number
-  ): Observable<Customer> {
+  editCustomerDetails(customer: Customer, id: number): Observable<Customer> {
     return this.http.put<Customer>(
       `${environment.serverUrl}/customers/${id}`,
       customer,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': this.token,
+        },
+      }
+    );
+  }
+  addCustomer(customer: AddCustomer, user_id: number): Observable<Customer> {
+    let newCustomer = customer;
+    newCustomer.user_id = user_id;
+    return this.http.post<Customer>(
+      `${environment.serverUrl}/customers`,
+      newCustomer,
       {
         headers: {
           'Content-Type': 'application/json',

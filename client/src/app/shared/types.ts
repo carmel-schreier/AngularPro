@@ -7,11 +7,12 @@ export interface Customer {
   user_id: number;
 }
 
-export interface EditedCustomer {
-  first_name: string;
-  last_name: string;
-  phone: string;
-  email: string;
+export interface AddCustomer {
+  name?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  country_id?: number | null;
+  user_id?: number;
 }
 
 export interface Login {
@@ -21,7 +22,7 @@ export interface Login {
 
 export interface User {
   token?: string | null;
-  id: number | null;
+  id: number;
   name: string | null;
   email: string | null;
 }
