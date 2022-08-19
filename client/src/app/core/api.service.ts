@@ -45,12 +45,10 @@ export class ApiService {
       }
     );
   }
-  addCustomer(customer: AddCustomer, user_id: number): Observable<Customer> {
-    let newCustomer = customer;
-    newCustomer.user_id = user_id;
+  addCustomer(customer: AddCustomer): Observable<Customer> {
     return this.http.post<Customer>(
       `${environment.serverUrl}/customers`,
-      newCustomer,
+      customer,
       {
         headers: {
           'Content-Type': 'application/json',

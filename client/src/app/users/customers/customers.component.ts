@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 import { number } from 'joi';
 import { ApiService } from 'src/app/core/api.service';
 import { AuthService } from 'src/app/core/auth.service';
-import { Customer, User } from 'src/app/shared/types';
+import { AddCustomer, Customer, User } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-customers',
@@ -29,6 +29,7 @@ import { Customer, User } from 'src/app/shared/types';
 export class CustomersComponent implements OnInit {
   customers!: Array<Customer>;
   @Input() user!: User;
+  added!: AddCustomer;
 
   addCustomerForm = new FormGroup({
     first_name: new FormControl('', {
@@ -50,8 +51,10 @@ export class CustomersComponent implements OnInit {
       return;
     }
     console.log('in submit form');
+    this.added = this.addCustomerForm.value;
+    this.added.user_id = this.user.id;
     let user_id = this.user.id;
-    this.apiService.addCustomer(this.addCustomerForm.value, user_id).subscribe({
+    this.apiService.addCustomer(this.added).subscribe({
       next: (data: Customer) => {
         this.getCustomers(this.user);
         //this.showNotification = true;

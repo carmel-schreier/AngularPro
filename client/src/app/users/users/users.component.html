@@ -4,9 +4,10 @@
       COMPANY <i class="bi-balloon-fill"></i> CRM
     </a>
   </div>
-  <div class="header">
-    <button class="email me-3">{{user.email}}</button>
-    <a (click)="logout()" class="">Log Out</a>
+  <div class="header me-5">
+    <p class="email ">{{user.email}} <i class="bi-caret-down-fill ms-1 me-1"></i>
+    </p>
+    <button (click)="logout()" class="log-out btn btn-danger">Log out</button>
   </div>
 </nav>
 <app-customers [user]="user"></app-customers>

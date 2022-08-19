@@ -22,9 +22,9 @@ export interface Login {
 
 export interface User {
   token?: string | null;
-  id: number;
-  name: string | null;
-  email: string | null;
+  id?: number;
+  name?: string | null;
+  email?: string | null;
 }
 
 export interface RegisterUser {
