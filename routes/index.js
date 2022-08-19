@@ -8,7 +8,7 @@ router.options('*', function (req, res, next) {
 });
 
 router.post('/login', auth.login);
-router.get('/refresh', auth.refreshUser)
+router.get('/refresh', auth.getUser)
 
 
 router.post('/register', auth.registerUser);

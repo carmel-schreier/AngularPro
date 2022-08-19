@@ -1,0 +1,36 @@
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+  background-color: rgb(100, 192, 80);
+  h1 {
+    font-weight: 550;
+  }
+  i {
+    font-size: 50px;
+    margin-right: 10px;
+    margin-left: 3px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+}
+
+.show-edit {
+  display: block;
+}
+
+.show-regular {
+  display: block;
+}
+
+.help-block {
+  color: red;
+}
+
+.ng-invalid {
+  border: 1px solid red;
+}

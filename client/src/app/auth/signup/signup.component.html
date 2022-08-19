@@ -1,0 +1,36 @@
+<H1 class="my-5" style="text-align: center;">COMPANY <i class="bi-balloon-fill"></i> CRM</H1>
+<div class="row">
+  <div class="col-xs-12 col-md-6 offset-md-3">
+    <form *ngIf="!registerSuccess" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input #first formControlName="name" type="text" class="form-control" id="firstName"
+          placeholder="Enter your Name">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control" id="email" aria-describedby="emailHelp"
+          placeholder="Enter you email">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input formControlName="password" type="password" class="form-control" id="password"
+          placeholder="Enter password">
+      </div>
+      <div class="mb-3">
+        <label for="retypePassword" class="form-label">Retype Password</label>
+        <input formControlName="retypePassword" type="password" class="form-control" id="retypePassword"
+          placeholder="Confirm Password">
+      </div>
+      <button [disabled]="!signupForm.valid" type="submit" class="btn btn-primary">Create
+        Account</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="registerSuccess">
+  You have created new account successfully.
+  <a routerLink="/login-component">Login to your account</a>
+</div>

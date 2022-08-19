@@ -7,7 +7,6 @@ const utility = require("../shared/utilityFunctions");
 
 module.exports = {
     login: async function (req, res, next) {
-
         const schema = joi.object({
             email: joi.string().required().min(6).max(255).email(),
             password: joi.string().required().min(6),
@@ -52,17 +51,14 @@ module.exports = {
         }
     },
 
-    refreshUser: async function (req, res, next) {
+    getUser: async function (req, res, next) {
         const token = req.header("x-auth-token");
-        console.log("i'm in server" + token)
         let payload = utility.getPayload(token);
-
         const sql = "SELECT * FROM users WHERE id=?;";
 
         try {
             const result = await database.query(sql, [payload.id]);
             let user = result[0][0];
-            console.log(user.id + user.email)
 
             res.status(200).json({
                 id: user.id,

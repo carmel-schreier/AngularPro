@@ -1,0 +1,48 @@
+<div class="top mt-3">
+  <i class="person bi-file-person"></i>
+  <h1>Customers</h1>
+</div>
+
+<form (ngSubmit)="onSubmit()">
+  <div class="m-3">
+    <input formControlName="firstName" type="text" class="form-control" placeholder="First Name">
+  </div>
+  <div class="m-3">
+    <input formControlName="lastLame" type="text" class="form-control" placeholder="Last Name">
+  </div>
+  <div class="m-3">
+    <input formControlName="phone" type="text" class="form-control" placeholder="Phone">
+  </div>
+  <div class="m-3">
+    <input formControlName="email" type="email" class="form-control" placeholder="Email">
+  </div>
+  <button class="btn btn-primary m-3"><i class="bi-person-plus me-2"></i>Add Customer</button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr class="table-success">
+      <th>
+        No.
+      </th>
+      <th>
+        First Name
+      </th>
+      <th>
+        Last Name
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let customer of customers;let i=index;">
+    <tr app-customer-row [customerInfo]="customer" [index]="i" (deleteClicked)="deleteCustomer(customer)"
+      (editClicked)="editCustomer(customer)"></tr>
+  </tbody>

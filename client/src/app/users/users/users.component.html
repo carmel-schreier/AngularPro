@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      COMPANY <i class="bi-balloon-fill"></i> CRM
+    </a>
+  </div>
+  <div class="header">
+    <button class="email me-3">{{user.email}}</button>
+    <a (click)="logout()" class="">Log Out</a>
+  </div>
+</nav>
+<app-customers [user]="user"></app-customers>

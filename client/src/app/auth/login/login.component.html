@@ -1,0 +1,28 @@
+<!-- <div class="d-flex flex-column  justify-content-center"> -->
+<H1 class="my-5" style="text-align: center;">COMPANY <i class="bi-balloon-fill"></i> CRM</H1>
+<h5 class="mb-3" style="text-align: center;">Login with your account</h5>
+<div class="row">
+  <div class="col-xs-12 col-md-6 offset-md-3">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3 form-group">
+        <!-- <label for="" class="form-label">Email</label> -->
+        <input #emailField formControlName="email" type="email" class="form-control" placeholder="Your Email">
+      </div>
+      <div class="mb-3 form-group">
+        <!-- <label for="" class="form-label">Password</label> -->
+        <input formControlName="password" type="password" class="form-control" placeholder="Your Password">
+
+      </div>
+      <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary">Sign in</button>
+      <!--  -->
+    </form>
+    <div style="text-align:center;">
+      <a routerLink="/signup-component" routerLinkActive="active" ariaCurrentWhenActive="page" class="mt-1">Don't have
+        an account yet? Sign Up</a>
+    </div>
+  </div>
+</div>
+<div class="col-xs-12 col-md-6 offset-md-3 mt-5" style="text-align:center;">
+  <div class="text-muted" style="text-align:centre !important;">Copyrights ©
+    2022</div>
+</div>

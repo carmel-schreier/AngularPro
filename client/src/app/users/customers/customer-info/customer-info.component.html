@@ -1,0 +1,43 @@
+<td>{{index+1}}</td>
+<td>
+  <div *ngIf="edit!=true">{{customerInfo.first_name}}</div>
+  <div *ngIf="edit==true">
+    <input type="text" [(ngModel)]="customerInfo.first_name" class="form-control" #f="ngModel" required minlength="2"
+      maxlength="255" id="f-name" #fn (keyup)="checkValidEdit()">
+    <span class="help-block" *ngIf="!f.valid">*Please enter a valid first name</span>
+  </div>
+</td>
+
+<td>
+  <div *ngIf="edit!=true">{{customerInfo.last_name}}</div>
+  <div *ngIf="edit==true">
+    <input type="text" [(ngModel)]="customerInfo.last_name" class="form-control" #l="ngModel" required minlength="2"
+      maxlength="255" id="l-name" #ln (keyup)="checkValidEdit()">
+    <span class="help-block" *ngIf="!l.valid">*Please enter a valid last name</span>
+  </div>
+</td>
+<td>
+  <div *ngIf="edit!=true">{{customerInfo.phone}}</div>
+  <div *ngIf="edit==true">
+    <input type="text" [(ngModel)]="customerInfo.phone" class="form-control" #p="ngModel" pattern="^[0-9-]{8,12}$"
+      required id="phone" #ph (keyup)="checkValidEdit()">
+    <span class="help-block" *ngIf="!p.valid">*Please enter a valid phone number</span>
+  </div>
+</td>
+
+<td>
+  <div *ngIf="edit!=true">{{customerInfo.email}}</div>
+  <div *ngIf="edit==true">
+    <input type="email" [(ngModel)]="customerInfo.email" class="form-control" #e="ngModel" required email id="email" #em
+      (keyup)="checkValidEdit()">
+    <span class="help-block" *ngIf="!e.valid">*Please enter a valid email</span>
+  </div>
+</td>
+<span *ngIf="edit!=true" class="end">
+  <button (click)="editCustomerInfo()" class="btn btn-default end"><i class="bi-pencil-fill"></i></button>
+  <button (click)="deleteCustomerInfo()" class="btn btn-default end"><i class="bi-trash3-fill"></i></button>
+</span>
+<span *ngIf="edit==true" class="edit d-flex flex-row">
+  <button [disabled]="!valid" (click)="submitEdit()" type="submit" class="btn btn-primary me-2">Submit</button>
+  <button (click)="cancelEdit()" class="btn btn-primary">Cancel</button>
+</span>
