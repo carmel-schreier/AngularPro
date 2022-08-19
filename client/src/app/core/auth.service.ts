@@ -24,13 +24,9 @@ export class AuthService implements CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Promise<boolean> {
-    console.log('in can activate child');
-    // is the user logged in
     if (this.isLoggedIn()) {
       return true;
     }
-
-    // store the attempted url for redirecting
     this.redirectUrl = state.url;
 
     return this.router.navigate(['login-component']);

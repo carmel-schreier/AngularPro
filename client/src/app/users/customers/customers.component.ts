@@ -50,7 +50,6 @@ export class CustomersComponent implements OnInit {
     if (!this.addCustomerForm.valid) {
       return;
     }
-    console.log('in submit form');
     this.added = this.addCustomerForm.value;
     this.added.user_id = this.user.id;
     let user_id = this.user.id;
@@ -74,7 +73,6 @@ export class CustomersComponent implements OnInit {
     this.apiService.getCustomersDetails(user).subscribe({
       next: (data: Array<Customer>) => {
         this.customers = data;
-        console.log(this.customers);
       },
       error: (err) => {
         console.error(err);
@@ -86,7 +84,6 @@ export class CustomersComponent implements OnInit {
   deleteCustomer(customer: Customer) {
     let id = customer.id;
     //let theId = id.toString();
-    console.log("i'm in delete, customer_id= " + customer.id);
     this.apiService.deleteCustomer(customer.id);
     //.subscribe({
     //next: (data) => {

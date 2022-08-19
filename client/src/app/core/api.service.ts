@@ -77,8 +77,6 @@ export class ApiService {
   }
 
   getUser(): Observable<User> {
-    console.log("I'm in refresh");
-    console.log('and' + this.token);
     return this.http.get<User>(`${environment.serverUrl}/refresh`, {
       headers: {
         'x-auth-token': this.token,
