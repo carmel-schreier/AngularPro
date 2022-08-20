@@ -16,13 +16,17 @@ import { AuthService } from 'src/app/core/auth.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('emailField') emailField!: ElementRef;
+  @ViewChild('passwordField') passwordField!: ElementRef;
+
+  emailValid = true;
+  passwordValid = true;
 
   loginForm = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
     password: new FormControl('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(6)],
     }),
   });
 
@@ -46,5 +50,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
       error: (err) => console.error(err),
     });
+  }
+  checkValidEmail() {
+    if (this.emailField.nativeElement.classList.contains('ng-invalid'))
+      this.emailValid = false;
+    else this.emailValid = true;
+  }
+  checkValidPassword() {
+    if (this.passwordField.nativeElement.classList.contains('ng-invalid'))
+      this.passwordValid = false;
+    else this.passwordValid = true;
   }
 }
