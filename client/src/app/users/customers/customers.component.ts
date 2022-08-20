@@ -1,24 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
-import {
-  Component,
-  OnInit,
-  NgModule,
-  ViewChild,
-  Renderer2,
-  ElementRef,
-  Input,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { number } from 'joi';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/core/api.service';
-import { AuthService } from 'src/app/core/auth.service';
 import { AddCustomer, Customer, User } from 'src/app/shared/types';
 
 @Component({
@@ -28,6 +10,7 @@ import { AddCustomer, Customer, User } from 'src/app/shared/types';
 })
 export class CustomersComponent implements OnInit {
   customers!: Array<Customer>;
+  notValid = false;
   @Input() user!: User;
   added!: AddCustomer;
 
@@ -48,15 +31,14 @@ export class CustomersComponent implements OnInit {
 
   onSubmit() {
     if (!this.addCustomerForm.valid) {
+      this.notValid = true;
       return;
     }
     this.added = this.addCustomerForm.value;
     this.added.user_id = this.user.id;
-    let user_id = this.user.id;
     this.apiService.addCustomer(this.added).subscribe({
       next: (data: Customer) => {
         this.getCustomers(this.user);
-        //this.showNotification = true;
       },
       error: (err) => console.error(err),
     });
@@ -69,7 +51,6 @@ export class CustomersComponent implements OnInit {
   }
 
   getCustomers(user: User) {
-    let user_id = user.id;
     this.apiService.getCustomersDetails(user).subscribe({
       next: (data: Array<Customer>) => {
         this.customers = data;
@@ -83,21 +64,7 @@ export class CustomersComponent implements OnInit {
 
   deleteCustomer(customer: Customer) {
     let id = customer.id;
-    //let theId = id.toString();
     this.apiService.deleteCustomer(customer.id);
-    //.subscribe({
-    //next: (data) => {
-    //this.customers = data;
-    //console.log(this.customers);
-    //return this.courses;
-    // console.log(data);
-    // },
-    //error: (err) => {
-    // console.error(err);
-    // },
-    //complete() {},
-    // });
-
     this.getCustomers(this.user);
   }
   editCustomer(customer: Customer) {

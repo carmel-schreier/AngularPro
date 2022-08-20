@@ -15,8 +15,6 @@ export class UsersComponent implements OnInit {
   user!: User;
   userDefined = false;
   showLogout = false;
-  //token!: string;
-  //user_id!:string;
 
   constructor(
     private apiService: ApiService,
@@ -28,14 +26,6 @@ export class UsersComponent implements OnInit {
     this.getUser();
     this.userDefined = typeof this.user.id == `number` ? true : false;
   }
-
-  //getId(): any{
-  //  const token = localStorage.getItem(this.tokenField);
-  //  if (token && token.length > 0) {
-  //    const id=this.authService.retrieveUser(token);
-  //  }
-  //
-  //}
 
   getUser() {
     this.apiService.getUser().subscribe({

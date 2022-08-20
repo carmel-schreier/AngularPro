@@ -16,8 +16,12 @@
   <div class="m-3">
     <input formControlName="email" type="email" class="form-control" placeholder="Email">
   </div>
-  <button class="btn btn-primary m-3"><i class="bi-person-plus me-2"></i>Add Customer</button>
+  <button [disabled]="!addCustomerForm.valid" class="btn btn-primary m-3"><i class="bi-person-plus me-2"></i>Add
+    Customer</button>
 </form>
+<span *ngIf="notValid" class="help-block">*Please
+  enter valid customer details</span>
+
 
 <table class="table">
   <thead>
