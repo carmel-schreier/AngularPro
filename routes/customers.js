@@ -9,11 +9,4 @@ router.delete('/customers/:id', mwAuth, cm.deleteCustomer);
 router.post('/customers', mwAuth, cm.addCustomer);
 
 
-//router.delete('/cards/:id', mwAuth, cardsM.deleteCard);
-//router.get('/courses/sorted', fm.getSortedCoursesDetails);
-
-//router.get('/courses/export', fm.exportCourses);
-//router.get('/courses/export/filtered', fm.exportFilteredCourses);
-
-
 module.exports = router;
