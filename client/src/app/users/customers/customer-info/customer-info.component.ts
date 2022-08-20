@@ -17,6 +17,7 @@ import { Customer } from 'src/app/shared/types';
 export class CustomerInfoComponent implements OnInit {
   edit = false;
   valid = true;
+  showNotification = false;
   @Input() customerInfo!: Customer;
   @Input() index!: number;
 
@@ -31,8 +32,16 @@ export class CustomerInfoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  deleteCustomerInfo() {
+
+  onDelete() {
+    this.showNotification = true;
+  }
+  deleteCustomerInfo(state: boolean) {
     this.deleteClicked.emit(this.customerInfo);
+    this.showNotification = state;
+  }
+  notificationClosed(state: boolean) {
+    this.showNotification = state;
   }
   editCustomerInfo() {
     this.edit = true;

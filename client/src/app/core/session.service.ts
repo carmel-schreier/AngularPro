@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -5,9 +6,11 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class SessionService {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   redirectToFirstPage() {
-    this.router.navigate(['login-component']);
+    this.authService.isLoggedIn() == false
+      ? this.router.navigate(['login-component'])
+      : this.router.navigate(['users-component']);
   }
 }

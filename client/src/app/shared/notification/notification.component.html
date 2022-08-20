@@ -1,0 +1,21 @@
+<div class="notification-container" role="alert" [ngClass]="{ 'd-block' : showNotification }">
+  <div class="notification">
+    <!-- header -->
+    <div class="n-header" *ngIf="headerLabel">
+      {{headerLabel}}
+    </div>
+    <!-- content -->
+    <div>
+      <ng-content></ng-content>
+    </div>
+    <!-- button -->
+    <div class="text-center pt-10">
+      <button (click)="onOKButtonClicked()" type="button" class="btn btn-primary btn-default">
+        {{buttonLabel_2}}
+      </button>
+      <button (click)="onCancelButtonClicked()" type="button" class="btn btn-secondary btn-default ms-4">
+        {{buttonLabel_1}}
+      </button>
+    </div>
+  </div>
+</div>

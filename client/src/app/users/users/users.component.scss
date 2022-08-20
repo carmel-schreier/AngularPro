@@ -16,8 +16,10 @@ p {
   position: absolute;
   bottom: -20px;
 }
-.header:hover {
-  .log-out {
-    display: block;
-  }
+//.header:hover {
+//
+//}
+
+.log-out.show {
+  display: block;
 }

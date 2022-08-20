@@ -35,7 +35,14 @@
 </td>
 <span *ngIf="edit!=true" class="end">
   <button (click)="editCustomerInfo()" class="btn btn-default end"><i class="bi-pencil-fill"></i></button>
-  <button (click)="deleteCustomerInfo()" class="btn btn-default end"><i class="bi-trash3-fill"></i></button>
+  <button (click)="onDelete()" class="btn btn-default end"><i class="bi-trash3-fill"></i></button>
+
+  <app-notification (buttonCancelClicked)="notificationClosed($event)" (buttonOKClicked)="deleteCustomerInfo($event)"
+    [headerLabel]="" [showNotification]="showNotification">
+    <span>Are you sure you want to delete {{customerInfo.first_name}}
+      {{customerInfo.last_name}}?</span>
+  </app-notification>
+
 </span>
 <span *ngIf="edit==true" class="edit d-flex flex-row">
   <button [disabled]="!valid" (click)="submitEdit()" type="submit" class="btn btn-primary me-2">Submit</button>
