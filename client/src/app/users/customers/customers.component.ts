@@ -69,12 +69,13 @@ export class CustomersComponent implements OnInit {
   }
   editCustomer(customer: Customer) {
     this.apiService.editCustomerDetails(customer, customer.id).subscribe({
-      next: (data: Customer) => {},
+      next: (data: Customer) => {
+        this.getCustomers(this.user);
+      },
       error: (err) => {
         console.error(err);
       },
       complete() {},
     });
-    this.getCustomers(this.user);
   }
 }
