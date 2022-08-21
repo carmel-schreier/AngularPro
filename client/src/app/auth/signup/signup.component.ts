@@ -17,6 +17,7 @@ import { RegisterUser } from 'src/app/shared/types';
 export class SignupComponent implements OnInit, AfterViewInit {
   @ViewChild('first') firstField!: ElementRef;
   registerSuccess = false;
+  same = true;
 
   signupForm = new FormGroup({
     name: new FormControl('', {
@@ -54,6 +55,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       !retypePassword ||
       password.value !== retypePassword.value
     ) {
+      this.same = false;
       return false;
     }
 

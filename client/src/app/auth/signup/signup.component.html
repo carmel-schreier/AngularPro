@@ -24,6 +24,7 @@
         <label for="retypePassword" class="form-label">Retype Password</label>
         <input formControlName="retypePassword" type="password" class="form-control" id="retypePassword"
           placeholder="Confirm Password">
+        <span class="help-block" *ngIf="!same">*Retyped password doesn't match</span>
       </div>
       <button [disabled]="!signupForm.valid" type="submit" class="btn btn-primary">Create
         Account</button>
