@@ -1,22 +1,18 @@
-import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { number } from 'joi';
+import { EmailOptions } from 'joi';
 import { ApiService } from 'src/app/core/api.service';
 import { AuthService } from 'src/app/core/auth.service';
-import { User } from 'src/app/shared/types';
+import { User } from '../types';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class UsersComponent implements OnInit {
-  private readonly tokenField = 'token';
-  user!: User;
-  email!: string;
-  userDefined = false;
+export class HeaderComponent implements OnInit {
   showLogout = false;
-
+  user!: User;
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -24,11 +20,10 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
+    this.getEmail();
   }
-
-  getUser() {
-    this.apiService.getUser().subscribe({
+  getEmail() {
+    this.apiService.getEmail().subscribe({
       next: (data: User) => {
         this.user = data;
       },

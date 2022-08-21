@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (data) => {
-        this.router.navigate(['/users-component']);
+        this.router.navigate(['/customers-component']);
       },
 
       error: (err) => console.error(err),

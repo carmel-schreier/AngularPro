@@ -52,8 +52,10 @@ module.exports = {
     },
 
     getUser: async function (req, res, next) {
+
         const token = req.header("x-auth-token");
         let payload = utility.getPayload(token);
+
         const sql = "SELECT * FROM users WHERE id=?;";
 
         try {
@@ -61,8 +63,8 @@ module.exports = {
             let user = result[0][0];
 
             res.status(200).json({
-                id: user.id,
-                name: user.name,
+                //id: user.id,
+                //name: user.name,
                 email: user.email,
             });
         } catch (err) {

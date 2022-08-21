@@ -75,7 +75,7 @@ export class ApiService {
     });
   }
 
-  getUser(): Observable<User> {
+  getEmail(): Observable<User> {
     return this.http.get<User>(`${environment.serverUrl}/refresh`, {
       headers: {
         'x-auth-token': this.token,

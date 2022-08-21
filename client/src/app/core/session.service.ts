@@ -11,6 +11,6 @@ export class SessionService {
   redirectToFirstPage() {
     this.authService.isLoggedIn() == false
       ? this.router.navigate(['login-component'])
-      : this.router.navigate(['users-component']);
+      : this.router.navigate(['customers-component']);
   }
 }
