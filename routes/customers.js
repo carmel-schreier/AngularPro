@@ -8,10 +8,4 @@ router.put('/customers/:id', mwAuth, cm.editCustomer);
 router.delete('/customers/:id', mwAuth, cm.deleteCustomer);
 router.post('/customers', mwAuth, cm.addCustomer);
 
-<<
-<< << < HEAD
-
-module.exports = router; ===
-=== =
-module.exports = router; >>>
->>> > e726a2575182d38bd3f2bbbe40fdf8cb29b541b6
+module.exports = router;
