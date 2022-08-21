@@ -35,10 +35,9 @@ export class CustomersComponent implements OnInit {
       return;
     }
     this.added = this.addCustomerForm.value;
-    this.added.user_id = this.user.id;
     this.apiService.addCustomer(this.added).subscribe({
       next: (data: Customer) => {
-        this.getCustomers(this.user);
+        this.getCustomers();
       },
       error: (err) => console.error(err),
     });
@@ -47,11 +46,11 @@ export class CustomersComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.getCustomers(this.user);
+    this.getCustomers();
   }
 
-  getCustomers(user: User) {
-    this.apiService.getCustomersDetails(user).subscribe({
+  getCustomers() {
+    this.apiService.getCustomersDetails().subscribe({
       next: (data: Array<Customer>) => {
         this.customers = data;
       },
@@ -63,14 +62,13 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer) {
-    let id = customer.id;
     this.apiService.deleteCustomer(customer.id);
-    this.getCustomers(this.user);
+    this.getCustomers();
   }
   editCustomer(customer: Customer) {
     this.apiService.editCustomerDetails(customer, customer.id).subscribe({
       next: (data: Customer) => {
-        this.getCustomers(this.user);
+        this.getCustomers();
       },
       error: (err) => {
         console.error(err);

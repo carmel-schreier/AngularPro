@@ -4,7 +4,7 @@ export interface Customer {
   last_name: string;
   phone: string;
   email: string;
-  user_id: number;
+  user_id?: number;
 }
 
 export interface AddCustomer {

@@ -25,10 +25,9 @@ export class ApiService {
       });
   }
 
-  getCustomersDetails(user: User): Observable<Array<Customer>> {
-    let user_id = user.id;
+  getCustomersDetails(): Observable<Array<Customer>> {
     return this.http.get<Array<Customer>>(
-      `${environment.serverUrl}/customers?user_id=${user_id}`,
+      `${environment.serverUrl}/customers`,
       { headers: { 'x-auth-token': this.token } }
     );
   }

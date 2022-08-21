@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { number } from 'joi';
 import { ApiService } from 'src/app/core/api.service';
@@ -13,6 +13,7 @@ import { User } from 'src/app/shared/types';
 export class UsersComponent implements OnInit {
   private readonly tokenField = 'token';
   user!: User;
+  email!: string;
   userDefined = false;
   showLogout = false;
 
@@ -24,7 +25,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.userDefined = typeof this.user.id == `number` ? true : false;
   }
 
   getUser() {

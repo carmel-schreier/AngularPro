@@ -1,28 +1,32 @@
 const joi = require("joi");
 const database = require("./database");
 const bcrypt = require("bcrypt");
+const utility = require("../shared/utilityFunctions");
 
 module.exports = {
 
     getCustomers: async function (req, res, next) {
-        const param = req.query;
-        const schema = joi.object({
-            user_id: joi.number().required(),
-        });
-        const {
-            error,
-            value
-        } = schema.validate(param);
-        if (error) {
-            console.log(error);
-            res.status(400).send("Not found");
-            return;
-        }
+        //const param = req.query;
+        //const schema = joi.object({
+        //    user_id: joi.number().required(),
+        //});
+        //const {
+        //    error,
+        //    value
+        //} = schema.validate(param);
+        //if (error) {
+        //    console.log(error);
+        //    res.status(400).send("Not found");
+        //    return;
+        //}
+        const token = req.header("x-auth-token");
+        let user_id = utility.getPayload(token).id;
+
         const sql =
             `SELECT * FROM customers WHERE user_id=? ORDER BY last_name ASC;`;
 
         try {
-            const result = await database.query(sql, [value.user_id]);
+            const result = await database.query(sql, [user_id]);
             res.set('Access-Control-Allow-Origin', '*');
             res.status(200).json(rows);
         } catch (err) {
@@ -110,7 +114,7 @@ module.exports = {
                 .required()
                 .email()
                 .regex(/^[^@]+@[^@]+$/),
-            user_id: joi.number().required(),
+            //user_id: joi.number().required(),
 
         }).min(1);
 
@@ -119,7 +123,8 @@ module.exports = {
             value
         } = schema.validate(reqBody);
 
-
+        const token = req.header("x-auth-token");
+        let user_id = utility.getPayload(token).id;
 
         if (error) {
             res.status(400).send(`Error adding customer: ${error}`);
@@ -139,7 +144,7 @@ module.exports = {
                     reqBody.last_name,
                     reqBody.phone,
                     reqBody.email,
-                    reqBody.user_id,
+                    user_id,
                 ]
             );
         } catch (err) {
