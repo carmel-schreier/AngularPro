@@ -15,10 +15,10 @@ router.post('/register', auth.registerUser);
 
 
 //router.get('/logout', mwAuth, function (req, res, next) {
-//    return res
-//        .clearCookie('access_token')
-//        .status(200)
-//        .send('Successfully logged out.');
+//  return res
+//    .clearCookie('access_token')
+//    .status(200)
+//    .send('Successfully logged out.');
 //})
 
 module.exports = router;
