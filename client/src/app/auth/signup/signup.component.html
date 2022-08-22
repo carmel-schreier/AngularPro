@@ -29,10 +29,19 @@
       <button [disabled]="!signupForm.valid" type="submit" class="btn btn-primary">Create
         Account</button>
     </form>
+    <div style="text-align:center;">
+      <a routerLink="/login-component" routerLinkActive="active" ariaCurrentWhenActive="page" class="mt-1">Go back to
+        login</a>
+    </div>
   </div>
 </div>
 
 <div *ngIf="registerSuccess">
   You have created new account successfully.
   <a routerLink="/login-component">Login to your account</a>
+</div>
+
+<div class="col-xs-12 col-md-6 offset-md-3 mt-5" style="text-align:center;">
+  <div class="text-muted" style="text-align:centre !important;">Copyrights ©
+    2022</div>
 </div>
