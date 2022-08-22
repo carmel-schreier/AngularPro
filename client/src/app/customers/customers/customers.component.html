@@ -20,9 +20,10 @@
   <button [disabled]="!addCustomerForm.valid" class="btn btn-primary m-3"><i class="bi-person-plus me-2"></i>Add
     Customer</button>
 </form>
-<span *ngIf="notValid" class="help-block">*Please
-  enter valid customer details</span>
-
+<span *ngIf="invalidEmail" class="help-block">*Please
+  enter a valid customer email</span>
+<span *ngIf="invalidPhone" class="help-block">*Please
+  enter a valid customer phone number</span>
 
 <table class="table">
   <thead>

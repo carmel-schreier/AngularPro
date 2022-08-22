@@ -10,28 +10,44 @@ import { AddCustomer, Customer, User } from 'src/app/shared/types';
 })
 export class CustomersComponent implements OnInit {
   customers!: Array<Customer>;
-  notValid = false;
+  // notValid = false;
+  invalidEmail = false;
+  invalidPhone = false;
   @Input() user!: User;
   added!: AddCustomer;
 
   addCustomerForm = new FormGroup({
     first_name: new FormControl('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     last_name: new FormControl('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(2)],
     }),
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
     phone: new FormControl('', {
-      validators: Validators.required,
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(12),
+      ],
     }),
   });
 
   onSubmit() {
-    if (!this.addCustomerForm.valid) {
-      this.notValid = true;
+    if (
+      !this.addCustomerForm
+        .get('email')
+        ?.value?.match(
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+    ) {
+      this.invalidEmail = true;
+      return;
+    }
+    if (!this.addCustomerForm.get('phone')?.value?.match(/^[0-9-]{8,12}$/)) {
+      this.invalidPhone = true;
       return;
     }
     this.added = this.addCustomerForm.value;
@@ -42,6 +58,8 @@ export class CustomersComponent implements OnInit {
       error: (err) => console.error(err),
     });
     this.addCustomerForm.reset();
+    this.invalidEmail = false;
+    this.invalidPhone = false;
   }
 
   constructor(private apiService: ApiService) {}

@@ -13,6 +13,7 @@ import { User } from '../types';
 export class HeaderComponent implements OnInit {
   showLogout = false;
   user!: User;
+  email!: string | null | undefined;
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
     this.apiService.getEmail().subscribe({
       next: (data: User) => {
         this.user = data;
+        this.email = this.user.email;
       },
       error: (err) => {
         console.error(err);

@@ -91,16 +91,16 @@ module.exports = {
         const reqBody = req.body;
         const schema = joi.object({
             //id: joi.number().required(),
-            first_name: joi.string().min(2).max(200),
-            last_name: joi.string().min(2).max(300),
-            phone: joi.string().regex(/^[0-9-]{8,12}$/),
+            first_name: joi.string().required().min(2).max(200),
+            last_name: joi.string().required().min(2).max(300),
+            phone: joi.string().required().regex(/^[0-9-]{8,12}$/),
             email: joi
                 .string()
                 .required()
                 .email()
                 .regex(/^[^@]+@[^@]+$/),
 
-        }).min(1);
+        });
 
         const {
             error,

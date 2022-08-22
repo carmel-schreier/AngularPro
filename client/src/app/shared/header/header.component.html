@@ -5,7 +5,7 @@
     </a>
   </div>
   <div class="header me-5">
-    <p class="email ">{{user.email}} <i (click)="toggleShow()" class="bi-caret-down-fill ms-1 me-1"></i>
+    <p class="email ">{{email}} <i (click)="toggleShow()" class="bi-caret-down-fill ms-1 me-1"></i>
     </p>
     <button [ngClass]="{show:showLogout}" (click)="logout()" class="log-out btn btn-danger">Log out</button>
   </div>
