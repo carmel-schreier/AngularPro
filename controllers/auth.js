@@ -53,13 +53,12 @@ module.exports = {
 
     getUser: async function (req, res, next) {
 
-        const token = req.header("x-auth-token");
-        let payload = utility.getPayload(token);
+        let id = utility.getUserId(req.header("x-auth-token"));
 
         const sql = "SELECT * FROM users WHERE id=?;";
 
         try {
-            const result = await database.query(sql, [payload.id]);
+            const result = await database.query(sql, [id]);
             let user = result[0][0];
 
             res.status(200).json({

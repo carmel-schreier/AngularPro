@@ -41,6 +41,7 @@ export class CustomersComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
+    this.addCustomerForm.reset();
   }
 
   constructor(private apiService: ApiService) {}

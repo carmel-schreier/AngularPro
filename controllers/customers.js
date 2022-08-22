@@ -6,22 +6,7 @@ const utility = require("../shared/utilityFunctions");
 module.exports = {
 
     getCustomers: async function (req, res, next) {
-        //const param = req.query;
-        //const schema = joi.object({
-        //    user_id: joi.number().required(),
-        //});
-        //const {
-        //    error,
-        //    value
-        //} = schema.validate(param);
-        //if (error) {
-        //    console.log(error);
-        //    res.status(400).send("Not found");
-        //    return;
-        //}
-        const token = req.header("x-auth-token");
-        let user_id = utility.getPayload(token).id;
-
+        let user_id = utility.getUserId(req.header("x-auth-token"));
         const sql =
             `SELECT * FROM customers WHERE user_id=? ORDER BY last_name ASC;`;
 
@@ -114,7 +99,6 @@ module.exports = {
                 .required()
                 .email()
                 .regex(/^[^@]+@[^@]+$/),
-            //user_id: joi.number().required(),
 
         }).min(1);
 
@@ -123,8 +107,7 @@ module.exports = {
             value
         } = schema.validate(reqBody);
 
-        const token = req.header("x-auth-token");
-        let user_id = utility.getPayload(token).id;
+        let user_id = utility.getUserId(req.header("x-auth-token"));
 
         if (error) {
             res.status(400).send(`Error adding customer: ${error}`);

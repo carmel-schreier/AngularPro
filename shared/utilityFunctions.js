@@ -8,8 +8,10 @@ module.exports = {
     //    return payload
     //},
 
-    getPayload(token) {
-        return JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+    getUserId(token) {
+        let payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+        let user_id = payload.id;
+        return user_id
     }
 
 }
